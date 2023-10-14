@@ -1,10 +1,19 @@
-\documentclass[a4paper,12pt,leqno]{article}
+\documentclass[a4paper,12pt,leqno]{book}
 
 \input{pre/pkgs}
+\input{pre/cmds}
 
 \begin{document}
 
-\input{chp/01/sections}
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\input{chp/01/contents} % installation
+
+\backmatter
 
 \bibliography{ref/main}
 \bibliographystyle{plain}
