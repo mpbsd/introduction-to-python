@@ -42,7 +42,7 @@ Feito isto, vamos mudar para o diretório recém criado e, então, criaremos um
 novo diretório, digamos, \textit{meu\_primeiro\_projeto\_django}, para abrigar o
 desenvolvimento da nossa aplicação. Fica assim:
 
-\begin{lstlisting}[language=bash,caption={Criando o diretório que abrigará nossa aplicação}]
+\begin{lstlisting}[language=bash,caption={Criando o diretório que abrigará nossa aplicação -- parte 1}]
   > cd projects
   > mkdir -p meu_primeiro_projeto_django
 \end{lstlisting}
@@ -51,7 +51,7 @@ A seguir, adentramos o diretório recém criado, \textbf{criamos} e
 \textbf{ativamos} um ambiente virtual chamado \texttt{venv} (pouco criativo,
 certo?).
 
-\begin{lstlisting}[language=bash,caption={Criando o diretório que abrigará nossa aplicação}]
+\begin{lstlisting}[language=bash,caption={Criando o diretório que abrigará nossa aplicação -- parte 2}]
   > cd meu_primeiro_projeto_django
   > python3 -m venv venv
 \end{lstlisting}
@@ -158,4 +158,20 @@ para se reduzir a quantidade de comandos digitados ao terminal, pois este é um
 efeito do seu uso. O GNU Make é muito eficiente em detectar o que não foi
 modificado desde a última compilação e, portanto, economiza recursos da máquina
 e reduz tempo de execução de modo que em grandes projetos o seu uso se torna
-obrigatório (ou, então, alguma de suas alternativas).
+obrigatório (ou, então, de alguma de suas alternativas).
+
+\subsection{Outras referências}\label{ssec:outras-referências}
+
+Leituras sugeridas:
+
+\begin{enumerate}
+  \item
+    \href{https://python.org/}{https://python.org/}
+  \item
+    \href{https://docs.python-guide.org/}{O guia do mochileiro para Python}
+  \item
+    \href{https://developers.google.com/edu/python/}{Google's Python Class}
+  \item
+    Para se gerar documentação de softwares:
+    \href{https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html}{Sphinx}
+\end{enumerate}
