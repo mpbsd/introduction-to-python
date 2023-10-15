@@ -1,11 +1,24 @@
-\section{Sistemas Linux}\label{sec:instalação-em-sistemas-linux}
+\section{Distribuições Linux}\label{sec:distribuições-linux}
 
-Esta seção descreve a instalação da linguagem \python{} em dois dos excelentes
-sistemas operacionais de código aberto disponíveis: \debiangnulinux{} e
-\fedoraproject.
+Em sistemas Linux os softwares são, geralmente, chamados de \textit{pacotes},
+distribuídos através de \textit{repositórios} e gerenciados por meio de
+\textit{gerenciadores de pacotes}. Cada distribuição Linux possui seu próprio
+gerenciador de pacotes (e, sim, o \slackwarelinux{} possui o
+\href{https://docs.slackware.com/slackware:package_management}{\texttt{pkgtools}}).
+Em caso de dúvida, consulte a documentação para o seu sistema.
 
 \section{Debian GNU/Linux}\label{ssec:debian-gnu/linux}
 
+No Debian, vamos utilizar o gerenciador de pacotes \texttt{apt}.
+
+\begin{lstlisting}[language=bash,caption={Instalando Python 3 no Debian},label={install-python3-debian}]
+  > sudo apt install python3
+\end{lstlisting}
+
 \section{Fedora Linux}\label{ssec:fedora-linux}
 
+No Fedora, vamos utilizar o gerenciador de pacotes \texttt{dnf}.
 
+\begin{lstlisting}[language=bash,caption={Instalando Python 3 no Fedora}]
+  > sudo dnf install python3
+\end{lstlisting}

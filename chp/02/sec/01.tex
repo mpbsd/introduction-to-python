@@ -1,0 +1,161 @@
+\section{Ambientes virtuais}\label{sec:ambientes-virtuais}
+
+A primeira coisa a se fazer é certificar-se de que seja possível criar ambientes
+virtuais que possam isolar as dependências da aplicação em desenvolvimento do
+restante do sistema. Imagine, por exemplo, que você esteja utilizando uma certa
+biblioteca para a linguagem Python, numa versão \(X\) em seu trabalho, numa
+versão \(Y\) para um trabalho da faculdade, e, finalmente, numa versão \(Z\),
+mais recente do que as outras, para acompanhar o desenvolvimento de tal
+biblioteca. Eis a pergunta que surge: como manter tantas versões de uma mesma
+biblioteca em um único sistema? A resposta é simples: \textit{ambientes
+virtuais}.
+
+\subsection{Instalando o pip}\label{ssec:instalando-o-pip}
+
+\href{https://pypi.org/project/pip/}{\texttt{pip}} significa \textit{package
+installer for Python} e você pode usá-lo para instalar pacotes do
+\href{https://pypi.org/}{PyPi}, que significa \textit{Python Package Index}.
+Existe mais de uma maneira de se instalar o \texttt{pip} em seu sistema. Aqui,
+vamos instalá-lo através do gerenciador de pacotes em nosso sistema.
+
+\begin{lstlisting}[language=bash,caption={Instalando o \texttt{pip} no Debian}]
+  > sudo apt install python3-venv python3-pip
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash,caption={Instalando o \texttt{pip} no Fedora}]
+  > sudo dnf install python3-pip python3-wheel
+\end{lstlisting}
+
+\subsection{Criando ambientes virtuais}\label{ssec:criando-ambientes-virtuais}
+
+A criação de ambientes virtuais é muito simples. A fim de sermos mais didáticos,
+iremos supor que estejamos interessados em aprender a desenvolver sistemas
+\textit{web} com \href{https://www.djangoproject.com/}{Django}. Para começar,
+vamos criar uma pasta chamada \textit{projects}, que irá conter todos os
+projetos desenvolvidos neste computador. O comando para isto é o \texttt{mkdir}:
+
+\begin{lstlisting}[language=bash,caption={Criando o diretório de projetos}]
+  > mkdir -p projects
+\end{lstlisting}
+
+Feito isto, vamos mudar para o diretório recém criado e, então, criaremos um
+novo diretório, digamos, \textit{meu\_primeiro\_projeto\_django}, para abrigar o
+desenvolvimento da nossa aplicação. Fica assim:
+
+\begin{lstlisting}[language=bash,caption={Criando o diretório que abrigará nossa aplicação}]
+  > cd projects
+  > mkdir -p meu_primeiro_projeto_django
+\end{lstlisting}
+
+A seguir, adentramos o diretório recém criado, \textbf{criamos} e
+\textbf{ativamos} um ambiente virtual chamado \texttt{venv} (pouco criativo,
+certo?).
+
+\begin{lstlisting}[language=bash,caption={Criando o diretório que abrigará nossa aplicação}]
+  > cd meu_primeiro_projeto_django
+  > python3 -m venv venv
+\end{lstlisting}
+
+A opção \(-m\) é como se evoca um módulo de maneira não interativa em Python. O
+primeiro \texttt{venv} é, portanto, o módulo de mesmo nome em Python enquanto
+que o segundo \texttt{venv} é o nome escolhido para o ambiente virtual em
+questão. Procedendo assim, dá-se o nome de \texttt{venv} para todos os ambientes
+virtuais existentes na máquina. Mas, então, não há o risco de confusão? Não, não
+há. Lembre-se de que o \texttt{venv} recém criado reside na pasta chamada
+\textit{meu\_primeiro\_projeto\_django}.
+
+Agora, é hora de ativar o ambiente virtual e instalar as dependências para o
+nosso projeto, neste caso Django. A maneira de se fazer isto é com o comando
+\texttt{source}.
+
+\begin{lstlisting}[language=bash,caption={Ativando o ambiente virtual -- parte 1}]
+  > source venv/bin/activate
+\end{lstlisting}
+
+Enquanto isto irá funcionar quando o \textit{shell} utilizado for o
+\textbf{bash}, não podemos afirmar com certeza que todas as pessoas no planeta
+estarão a utilizá-lo, não é mesmo? E quando o shell em questão for o excelente
+\textbf{ksh}, por exemplo? Substitua o comando \texttt{source} por um ponto:
+
+\begin{lstlisting}[language=bash,caption={Ativando o ambiente virtual -- parte 2}]
+  > . venv/bin/activate
+\end{lstlisting}
+
+Feito isto, vamos finalmente instalar Django:
+
+\begin{lstlisting}
+  > pip install django
+\end{lstlisting}
+
+Resumindo:
+
+\begin{enumerate}
+  \item
+    Criamos uma pasta para abrigar a nossa aplicação;
+  \item
+    Entramos nesta pasta e, então, criamos um ambiente virtual para instalar as
+    dependências do projeto de maneira isolada do restante do sistema;
+  \item
+    Ativamos o ambiente virtual criado no passo anterior e, por fim,
+  \item
+    Instalamos as dependências.
+\end{enumerate}
+
+São muitos passos, não? Além disso, muitos dirão que estamos no século XXI, que
+usar o terminal é coisa do passado e, principalmente, que tem-se que digitar
+muita coisa! Prezados, \textit{makefile}'s são nossos amigos! Como qualquer
+explicação sobre o \href{https://www.gnu.org/software/make/}{GNU Make} escapa
+aos propósitos iniciais destas notas, gostaríamos apenas de dizer que
+\texttt{make} pode ser utilizado para automatizar o processo de se transformar
+códigos em produtos. Em verdade, esta explicação não faz juz ao incrível poder
+de \texttt{make}. Por exemplo, eu o utilizei para criar o PDF que você lê agora!
+
+Para dar um singelo exemplo, digamos que o nosso projeto utilize, além do já
+mencionado Django, o excelente
+\href{https://github.com/psf/black}{\texttt{black}}. Nós podemos, então, criar
+um arquivo chamado \textit{requirements.txt} na raiz de nosso projeto e com ele
+listar as dependências em nosso projeto, uma por linha. Ficaria assim:
+
+\begin{lstlisting}[caption={Um exemplo de requirements.txt}]
+  black
+  django
+\end{lstlisting}
+
+Feito isto, poderíamos criar um \texttt{makefile}, também na raiz de nosso
+projeto, com a seguinte regra:
+
+\begin{lstlisting}[caption={Exemplo de makefile}]
+  ready:
+    python3 -m venv venv; \
+    . venv/bin/activate; \
+    pip install -U pip; \
+    pip install -r requirements.txt; \
+    deactivate
+\end{lstlisting}
+
+Deste modo, quando quisermos criar um ambiente virtual e com ele instalar as
+dependências de nosso projeto, bastaria agora digitar um único comando:
+
+\begin{lstlisting}[language=bash,caption={Reduzindo-se a quantidade de comandos digitados}]
+  > make ready
+\end{lstlisting}
+
+A esta altura alguns poderiam perguntar:
+
+Mas, eu precisaria criar um makefile com uma regra como esta para cada novo
+projeto que eu iniciar?
+
+Boa pergunta! Sim, isto é verdade. No meu caso, tenho
+\href{https://github.com/SirVer/ultisnips}{snippets} de códigos em
+\href{https://www.vim.org/}{meu editor de textos favorito}, que automatizam o
+processo de criação de makefiles (e tantas outras coisas) nas linguagens de
+programação que mais utilizo, como C, Python e \LaTeX{} (e, sim, eu penso em
+\LaTeX{} como uma linguagem de programação; o que difere neste caso é o
+propósito do programa que estou a escrever).
+
+Eu não quero causar a impressão equivocada de que o \texttt{make} apenas serve
+para se reduzir a quantidade de comandos digitados ao terminal, pois este é um
+efeito do seu uso. O GNU Make é muito eficiente em detectar o que não foi
+modificado desde a última compilação e, portanto, economiza recursos da máquina
+e reduz tempo de execução de modo que em grandes projetos o seu uso se torna
+obrigatório (ou, então, alguma de suas alternativas).

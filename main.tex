@@ -1,17 +1,23 @@
-\documentclass[a4paper,12pt,leqno]{book}
+\documentclass[a4paper,10pt,leqno]{book}
 
 \input{pre/pkgs}
+\input{pre/opts}
 \input{pre/cmds}
+\input{pre/auth}
 
 \begin{document}
 
 \frontmatter
 
+\maketitle
+
 \tableofcontents
+\lstlistoflistings
 
 \mainmatter
 
 \input{chp/01/contents} % installation
+\input{chp/02/contents} % virtual environments
 
 \backmatter
 

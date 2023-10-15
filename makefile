@@ -25,8 +25,10 @@ clean:
 	find . -type f -name "*.bbl" | xargs rm -rf
 	find . -type f -name "*.blg" | xargs rm -rf
 	find . -type f -name "*.log" | xargs rm -rf
+	find . -type f -name "*.lol" | xargs rm -rf
 	find . -type f -name "*.out" | xargs rm -rf
 	find . -type f -name "*.pdf" | xargs rm -rf
 	find . -type f -name "*.spl" | xargs rm -rf
+	find . -type f -name "*.toc" | xargs rm -rf
 
 .PHONY: draft final clean
